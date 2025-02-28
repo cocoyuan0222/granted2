@@ -10,7 +10,7 @@
             background-color: #f4e1d2; /* 浅咖色背景 */
             text-align: center;
             margin-top: 50px;
-            overflow: hidden; /* 防止文字溢出屏幕 */
+            overflow: hidden; /* 防止内容溢出 */
             position: relative;
         }
 
@@ -110,18 +110,21 @@
             font-size: 30px;
             color: red;
             position: absolute;
-            animation: showMessage 0.3s ease-in-out forwards;
+            opacity: 0;
+            animation: showMessage 0.3s forwards;
             z-index: 1000;
+            white-space: nowrap;
         }
 
+        /* 动画效果，逐行出现 */
         @keyframes showMessage {
             0% {
                 opacity: 0;
-                transform: translate(0, 0);
+                transform: translateX(-100%); /* 从左侧滑动 */
             }
             100% {
                 opacity: 1;
-                transform: translate(var(--x), var(--y));
+                transform: translateX(0); /* 移动到原始位置 */
             }
         }
 
@@ -216,25 +219,27 @@
         });
 
         function createHateMessages() {
-            const numberOfMessages = 50; // 设置“讨厌你”出现的数量
+            const numberOfRows = 20; // 设置要显示的行数
             const screenWidth = window.innerWidth;
             const screenHeight = window.innerHeight;
 
-            for (let i = 0; i < numberOfMessages; i++) {
-                // 创建“讨厌你”元素
-                var hateMessage = document.createElement("div");
+            const message = "讨厌你";
+
+            for (let row = 0; row < numberOfRows; row++) {
+                const hateMessage = document.createElement("div");
                 hateMessage.className = "hate-message";
-                hateMessage.textContent = "讨厌你";
+                hateMessage.textContent = message;
 
-                // 随机位置
-                var randomX = Math.random() * screenWidth;
-                var randomY = Math.random() * screenHeight;
+                // 设置每一行的位置
+                const offsetTop = row * 40; // 每一行的垂直间距
+                const offsetLeft = (screenWidth / numberOfRows) * row; // 每个文字的水平起始位置
 
-                // 动态设置位置和动画效果
-                hateMessage.style.setProperty('--x', `${randomX}px`);
-                hateMessage.style.setProperty('--y', `${randomY}px`);
+                // 给每行添加动画延迟
+                hateMessage.style.animationDelay = `${row * 0.1}s`; // 控制每行的出现速度
 
-                // 将消息元素添加到页面中
+                hateMessage.style.top = `${offsetTop}px`;
+                hateMessage.style.left = `${offsetLeft}px`;
+
                 document.body.appendChild(hateMessage);
             }
         }

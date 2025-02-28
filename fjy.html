@@ -102,6 +102,34 @@
             font-size: 24px;
             font-weight: bold;
         }
+
+        /* "讨厌你" 文字动画 */
+        .hate-message {
+            font-size: 50px;
+            color: red;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: showMessage 2s ease-in-out forwards;
+            z-index: 1000;
+        }
+
+        @keyframes showMessage {
+            0% {
+                opacity: 0;
+                font-size: 50px;
+            }
+            50% {
+                opacity: 1;
+                font-size: 80px;
+            }
+            100% {
+                opacity: 1;
+                font-size: 50px;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -144,6 +172,9 @@
         var confirmButton = document.getElementById("confirmButton");
         var answerDiv = document.getElementById("answer");
 
+        // 连续选择的计数器
+        var consecutiveSelections = 0;
+        
         // 当点击图片时，显示大图
         photo.onclick = function() {
             modal.style.display = "block";
@@ -170,9 +201,21 @@
                 if (selectedOption.value === "redSweater") {
                     answerDiv.textContent = "仙品！！！";
                     answerDiv.style.color = "green";
+                    consecutiveSelections = 0;  // 重置连续选择计数器
                 } else {
-                    answerDiv.textContent = "太厕了！！！再给你一次机会";
+                    answerDiv.textContent = "太厕了！！！";
                     answerDiv.style.color = "red";
+                    
+                    // 增加连续选择计数器
+                    consecutiveSelections++;
+
+                    if (consecutiveSelections >= 2) {
+                        // 连续选择两次非“红毛衣”后，显示“讨厌你”
+                        var hateMessage = document.createElement("div");
+                        hateMessage.className = "hate-message";
+                        hateMessage.textContent = "讨厌你";
+                        document.body.appendChild(hateMessage);
+                    }
                 }
             } else {
                 answerDiv.textContent = "请先选择一个选项！";
@@ -182,4 +225,3 @@
     </script>
 </body>
 </html>
-

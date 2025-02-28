@@ -88,9 +88,6 @@
             if (nextMessage) {
                 messageDiv.textContent = nextMessage;
             }
-            if (nextImage) {
-                image1.src = nextImage;
-            }
 
             // 重新给新选项按钮绑定点击事件
             document.querySelectorAll(".new-option").forEach(function(button, index) {
@@ -119,6 +116,7 @@
         };
 
         document.getElementById("option1-right").onclick = function() {
+            // 隐藏当前的选项和图片，并显示新的选项
             showOptions("22.jpg", ["还是算了", "就要报这个！"], "33.jpg", "继续选择...");
         };
 

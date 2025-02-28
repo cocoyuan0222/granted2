@@ -73,11 +73,28 @@
             font-size: 18px;
         }
 
-        select {
-            font-size: 16px;
-            padding: 5px;
+        .radio-group {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+
+        .radio-group label {
+            margin-right: 20px;
+        }
+
+        button {
+            font-size: 18px;
+            padding: 10px 20px;
+            background-color: #f8b8d3;
+            color: white;
+            border: none;
             border-radius: 5px;
-            margin-left: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #f5a9d1;
         }
 
         #answer {
@@ -102,13 +119,19 @@
 
     <div class="question-container">
         <label for="person-select">请选择最牛逼的人</label>
-        <select id="person-select">
-            <option value="blueHair">蓝头发</option>
-            <option value="redSweater">红毛衣</option>
-            <option value="blackHoodie">黑卫衣</option>
-            <option value="man">男的</option>
-        </select>
+        <div class="radio-group">
+            <input type="radio" id="blueHair" name="person" value="blueHair">
+            <label for="blueHair">蓝头发</label>
+            <input type="radio" id="redSweater" name="person" value="redSweater">
+            <label for="redSweater">红毛衣</label>
+            <input type="radio" id="blackHoodie" name="person" value="blackHoodie">
+            <label for="blackHoodie">黑卫衣</label>
+            <input type="radio" id="man" name="person" value="man">
+            <label for="man">男的</label>
+        </div>
     </div>
+
+    <button id="confirmButton">就这么决定了</button>
 
     <div id="answer"></div>
 
@@ -118,7 +141,7 @@
         var modalImg = document.getElementById("modalImg");
         var photo = document.getElementById("myPhoto");
         var closeModal = document.getElementById("closeModal");
-        var personSelect = document.getElementById("person-select");
+        var confirmButton = document.getElementById("confirmButton");
         var answerDiv = document.getElementById("answer");
 
         // 当点击图片时，显示大图
@@ -139,17 +162,24 @@
             }
         }
 
-        // 选择最牛逼的人后显示结果
-        personSelect.addEventListener("change", function() {
-            var selectedOption = personSelect.value;
-            if (selectedOption === "redSweater") {
-                answerDiv.textContent = "仙品！！！";
-                answerDiv.style.color = "green";
+        // 点击按钮后显示结果
+        confirmButton.addEventListener("click", function() {
+            var selectedOption = document.querySelector('input[name="person"]:checked');
+            
+            if (selectedOption) {
+                if (selectedOption.value === "redSweater") {
+                    answerDiv.textContent = "仙品！！！";
+                    answerDiv.style.color = "green";
+                } else {
+                    answerDiv.textContent = "太厕了！！！";
+                    answerDiv.style.color = "red";
+                }
             } else {
-                answerDiv.textContent = "太厕了！！！";
-                answerDiv.style.color = "red";
+                answerDiv.textContent = "请先选择一个选项！";
+                answerDiv.style.color = "orange";
             }
         });
     </script>
 </body>
 </html>
+

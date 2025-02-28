@@ -127,6 +127,34 @@
             }
         }
 
+        /* 弹窗样式 */
+        .modal-popup {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-popup button {
+            background-color: #f8b8d3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+
+        .modal-popup button:hover {
+            background-color: #f5a9d1;
+        }
+
     </style>
 </head>
 <body>
@@ -160,6 +188,12 @@
 
     <div id="answer"></div>
 
+    <!-- 弹窗 -->
+    <div id="popup" class="modal-popup">
+        <p>现在知道错了吗？</p>
+        <button id="popupButton">对不起，还是红毛衣比较牛逼</button>
+    </div>
+
     <script>
         // 获取元素
         var modal = document.getElementById("myModal");
@@ -168,6 +202,8 @@
         var closeModal = document.getElementById("closeModal");
         var confirmButton = document.getElementById("confirmButton");
         var answerDiv = document.getElementById("answer");
+        var popup = document.getElementById("popup");
+        var popupButton = document.getElementById("popupButton");
 
         // 连续选择的计数器
         var consecutiveSelections = 0;
@@ -221,34 +257,56 @@
             const screenWidth = window.innerWidth;
             const screenHeight = window.innerHeight;
 
-            const message = "讨厌你！！！";
+            const message = "讨厌你";
             const messageWidth = 100; // "讨厌你"的宽度，假设每个文字宽度为100px
 
             // 计算每行的“讨厌你”个数
             const columnsPerRow = Math.floor(screenWidth / messageWidth);
             const numberOfRows = Math.floor(screenHeight / 50); // 每行的高度，50px为一行的高度
 
+            let rowCount = 0; // 当前正在显示的行号
+
             // 创建每行的“讨厌你”
-            for (let row = 0; row < numberOfRows; row++) {
-                for (let col = 0; col < columnsPerRow; col++) {
-                    const hateMessage = document.createElement("div");
-                    hateMessage.className = "hate-message";
-                    hateMessage.textContent = message;
-
-                    // 设置每个“讨厌你”的位置
-                    const topPosition = row * 50; // 每行的垂直间距
-                    const leftPosition = col * messageWidth; // 每个文字的水平位置
-
-                    // 给每个“讨厌你”添加动画延迟
-                    hateMessage.style.animationDelay = `${(row + col) * 0.05}s`; // 延迟时间
-
-                    hateMessage.style.top = `${topPosition}px`;
-                    hateMessage.style.left = `${leftPosition}px`;
-
-                    document.body.appendChild(hateMessage);
+            function fillRow() {
+                if (rowCount >= numberOfRows) {
+                    // 如果所有行都已经填充完，弹出弹窗
+                    popup.style.display = "block";
+                    return;
                 }
+
+                for (let i = 0; i < columnsPerRow; i++) {
+                    let messageElement = document.createElement("div");
+                    messageElement.className = "hate-message";
+                    messageElement.textContent = message;
+
+                    let leftPosition = i * messageWidth;
+                    let topPosition = rowCount * 50;
+
+                    messageElement.style.left = leftPosition + "px";
+                    messageElement.style.top = topPosition + "px";
+
+                    document.body.appendChild(messageElement);
+
+                    // 动画效果：逐渐显示
+                    setTimeout(function() {
+                        messageElement.style.opacity = 1;
+                    }, i * 100); // 每个文字的延迟
+
+                }
+
+                rowCount++;
+
+                // 延迟填充下一行
+                setTimeout(fillRow, columnsPerRow * 100);
             }
+
+            fillRow();
         }
+
+        // 弹窗按钮点击事件
+        popupButton.addEventListener("click", function() {
+            popup.style.display = "none";
+        });
     </script>
 </body>
 </html>

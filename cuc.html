@@ -75,27 +75,23 @@
         function showOptions(imageSrc, newOptions, nextImage, nextMessage = "") {
             // 隐藏当前内容
             image1.src = imageSrc;
-            options1.style.display = "none"; // 隐藏当前选项
+            options1.innerHTML = ""; // 清除旧选项
 
             // 创建并显示新选项
-            var newOptionHTML = '';
             newOptions.forEach(function(option, index) {
-                newOptionHTML += `<button class="new-option" id="option${index + 2}">${option}</button>`;
-            });
-            options1.innerHTML = newOptionHTML;
-
-            // 显示新图片和文字
-            if (nextMessage) {
-                messageDiv.textContent = nextMessage;
-            }
-
-            // 重新给新选项按钮绑定点击事件
-            document.querySelectorAll(".new-option").forEach(function(button, index) {
+                var button = document.createElement("button");
+                button.classList.add("new-option");
+                button.textContent = option;
+                options1.appendChild(button);
+                
+                // 绑定点击事件
                 button.onclick = function() {
-                    if (index === 0) { // 如果点击的是左边的选项
+                    if (option === "还是算了" || option === "我听劝") {
+                        // 如果选择了“左边”的选项
                         messageDiv.textContent = "你是对的";
                         image1.src = "66.jpg"; // 显示“你是对的”图
-                    } else { // 如果点击的是右边的选项
+                    } else {
+                        // 如果选择了“右边”的选项
                         if (nextImage === "33.jpg") {
                             showOptions("33.jpg", ["我听劝", "我坚持！"], "44.jpg", "继续选择...");
                         } else if (nextImage === "44.jpg") {
@@ -107,6 +103,11 @@
                     }
                 };
             });
+
+            // 显示新图片和文字
+            if (nextMessage) {
+                messageDiv.textContent = nextMessage;
+            }
         }
 
         // 初始选项点击事件
@@ -116,7 +117,7 @@
         };
 
         document.getElementById("option1-right").onclick = function() {
-            // 隐藏当前的选项和图片，并显示新的选项
+            // 点击右边选项后，显示新图片 22.jpg 并加载新的选项
             showOptions("22.jpg", ["还是算了", "就要报这个！"], "33.jpg", "继续选择...");
         };
 

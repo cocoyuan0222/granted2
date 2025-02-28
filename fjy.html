@@ -110,21 +110,9 @@
             font-size: 30px;
             color: red;
             position: absolute;
-            opacity: 0;
-            animation: showMessage 0.5s forwards;
+            opacity: 1; /* 直接显示，不做渐变 */
             z-index: 1000;
             white-space: nowrap;
-        }
-
-        @keyframes showMessage {
-            0% {
-                opacity: 0;
-                transform: translateX(-100%); /* 从左侧滑动 */
-            }
-            100% {
-                opacity: 1;
-                transform: translateX(0); /* 移动到原始位置 */
-            }
         }
 
         /* 弹窗样式 */
@@ -289,11 +277,6 @@
                     messageElement.style.top = topPosition + "px";
 
                     document.body.appendChild(messageElement);
-
-                    // 动画效果：逐渐显示
-                    setTimeout(function() {
-                        messageElement.style.opacity = 1;
-                    }, i * 100); // 每个文字的延迟
                 }
 
                 rowCount++;
@@ -326,4 +309,3 @@
     </script>
 </body>
 </html>
-

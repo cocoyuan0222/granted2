@@ -105,18 +105,17 @@
             font-weight: bold;
         }
 
-        /* "讨厌你" 文字动画 */
+        /* "讨厌你" 文字 */
         .hate-message {
             font-size: 30px;
             color: red;
             position: absolute;
             opacity: 0;
-            animation: showMessage 0.3s forwards;
+            animation: showMessage 0.5s forwards;
             z-index: 1000;
             white-space: nowrap;
         }
 
-        /* 动画效果，逐行出现 */
         @keyframes showMessage {
             0% {
                 opacity: 0;
@@ -172,7 +171,7 @@
 
         // 连续选择的计数器
         var consecutiveSelections = 0;
-        
+
         // 当点击图片时，显示大图
         photo.onclick = function() {
             modal.style.display = "block";
@@ -219,28 +218,35 @@
         });
 
         function createHateMessages() {
-            const numberOfRows = 20; // 设置要显示的行数
             const screenWidth = window.innerWidth;
             const screenHeight = window.innerHeight;
 
             const message = "讨厌你";
+            const messageWidth = 100; // "讨厌你"的宽度，假设每个文字宽度为100px
 
+            // 计算每行的“讨厌你”个数
+            const columnsPerRow = Math.floor(screenWidth / messageWidth);
+            const numberOfRows = Math.floor(screenHeight / 50); // 每行的高度，50px为一行的高度
+
+            // 创建每行的“讨厌你”
             for (let row = 0; row < numberOfRows; row++) {
-                const hateMessage = document.createElement("div");
-                hateMessage.className = "hate-message";
-                hateMessage.textContent = message;
+                for (let col = 0; col < columnsPerRow; col++) {
+                    const hateMessage = document.createElement("div");
+                    hateMessage.className = "hate-message";
+                    hateMessage.textContent = message;
 
-                // 设置每一行的位置
-                const offsetTop = row * 40; // 每一行的垂直间距
-                const offsetLeft = (screenWidth / numberOfRows) * row; // 每个文字的水平起始位置
+                    // 设置每个“讨厌你”的位置
+                    const topPosition = row * 50; // 每行的垂直间距
+                    const leftPosition = col * messageWidth; // 每个文字的水平位置
 
-                // 给每行添加动画延迟
-                hateMessage.style.animationDelay = `${row * 0.1}s`; // 控制每行的出现速度
+                    // 给每个“讨厌你”添加动画延迟
+                    hateMessage.style.animationDelay = `${(row + col) * 0.05}s`; // 延迟时间
 
-                hateMessage.style.top = `${offsetTop}px`;
-                hateMessage.style.left = `${offsetLeft}px`;
+                    hateMessage.style.top = `${topPosition}px`;
+                    hateMessage.style.left = `${leftPosition}px`;
 
-                document.body.appendChild(hateMessage);
+                    document.body.appendChild(hateMessage);
+                }
             }
         }
     </script>

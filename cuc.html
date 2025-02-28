@@ -75,7 +75,7 @@
         function showOptions(imageSrc, newOptions, nextImage, nextMessage = "") {
             // 隐藏当前内容
             image1.src = imageSrc;
-            options1.style.display = "none";
+            options1.style.display = "none"; // 隐藏当前选项
 
             // 创建并显示新选项
             var newOptionHTML = '';
@@ -95,11 +95,10 @@
             // 重新给新选项按钮绑定点击事件
             document.querySelectorAll(".new-option").forEach(function(button, index) {
                 button.onclick = function() {
-                    if (index === 0) {
+                    if (index === 0) { // 如果点击的是左边的选项
                         messageDiv.textContent = "你是对的";
-                        image1.src = "66.jpg"; // 如果选择了左边的选项
-                    } else {
-                        // 根据选择继续显示新图片和选项
+                        image1.src = "66.jpg"; // 显示“你是对的”图
+                    } else { // 如果点击的是右边的选项
                         if (nextImage === "33.jpg") {
                             showOptions("33.jpg", ["我听劝", "我坚持！"], "44.jpg", "继续选择...");
                         } else if (nextImage === "44.jpg") {

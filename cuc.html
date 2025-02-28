@@ -90,6 +90,7 @@
                         // 如果选择了“左边”的选项
                         messageDiv.textContent = "你是对的";
                         image1.src = "66.jpg"; // 显示“你是对的”图
+                        options1.style.display = "none"; // 隐藏选项
                     } else {
                         // 如果选择了“右边”的选项
                         if (nextImage === "33.jpg") {
@@ -99,6 +100,13 @@
                         } else if (nextImage === "55.jpg") {
                             messageDiv.textContent = "这辈子有了";
                             image1.src = "55.jpg";
+                            options1.innerHTML = ""; // 隐藏选项
+                            var retryButton = document.createElement("button");
+                            retryButton.textContent = "重新投胎";
+                            retryButton.onclick = function() {
+                                location.reload(); // 刷新页面，重新开始
+                            };
+                            options1.appendChild(retryButton); // 添加“重新投胎”按钮
                         }
                     }
                 };
@@ -114,6 +122,7 @@
         document.getElementById("option1-left").onclick = function() {
             messageDiv.textContent = "你是对的";
             image1.src = "66.jpg"; // 显示“你是对的”图
+            options1.style.display = "none"; // 隐藏选项
         };
 
         document.getElementById("option1-right").onclick = function() {

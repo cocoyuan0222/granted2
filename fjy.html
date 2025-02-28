@@ -10,6 +10,8 @@
             background-color: #f4e1d2; /* 浅咖色背景 */
             text-align: center;
             margin-top: 50px;
+            overflow: hidden; /* 防止文字溢出屏幕 */
+            position: relative;
         }
 
         h1 {
@@ -105,28 +107,21 @@
 
         /* "讨厌你" 文字动画 */
         .hate-message {
-            font-size: 50px;
+            font-size: 30px;
             color: red;
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            animation: showMessage 2s ease-in-out forwards;
+            animation: showMessage 0.3s ease-in-out forwards;
             z-index: 1000;
         }
 
         @keyframes showMessage {
             0% {
                 opacity: 0;
-                font-size: 50px;
-            }
-            50% {
-                opacity: 1;
-                font-size: 80px;
+                transform: translate(0, 0);
             }
             100% {
                 opacity: 1;
-                font-size: 50px;
+                transform: translate(var(--x), var(--y));
             }
         }
 
@@ -211,10 +206,7 @@
 
                     if (consecutiveSelections >= 2) {
                         // 连续选择两次非“红毛衣”后，显示“讨厌你”
-                        var hateMessage = document.createElement("div");
-                        hateMessage.className = "hate-message";
-                        hateMessage.textContent = "讨厌你";
-                        document.body.appendChild(hateMessage);
+                        createHateMessages();
                     }
                 }
             } else {
@@ -222,6 +214,30 @@
                 answerDiv.style.color = "orange";
             }
         });
+
+        function createHateMessages() {
+            const numberOfMessages = 50; // 设置“讨厌你”出现的数量
+            const screenWidth = window.innerWidth;
+            const screenHeight = window.innerHeight;
+
+            for (let i = 0; i < numberOfMessages; i++) {
+                // 创建“讨厌你”元素
+                var hateMessage = document.createElement("div");
+                hateMessage.className = "hate-message";
+                hateMessage.textContent = "讨厌你";
+
+                // 随机位置
+                var randomX = Math.random() * screenWidth;
+                var randomY = Math.random() * screenHeight;
+
+                // 动态设置位置和动画效果
+                hateMessage.style.setProperty('--x', `${randomX}px`);
+                hateMessage.style.setProperty('--y', `${randomY}px`);
+
+                // 将消息元素添加到页面中
+                document.body.appendChild(hateMessage);
+            }
+        }
     </script>
 </body>
 </html>

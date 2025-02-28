@@ -3,20 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的照片页面</title>
+    <title>谁是最牛逼的人？</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #f4e1d2; /* 浅咖色背景 */
             text-align: center;
             margin-top: 50px;
         }
 
+        h1 {
+            color: #f8b8d3; /* 浅粉色 */
+            text-align: center;
+        }
+
         .photo-container {
-            margin-top: 20px;
+            margin-top: 30px;
+            position: relative;
         }
 
         .photo {
-            width: 200px;
+            width: 300px; /* 放大预览图 */
             height: auto;
             cursor: pointer;
             transition: transform 0.3s ease;
@@ -60,13 +67,31 @@
             text-decoration: none;
             cursor: pointer;
         }
+
+        .question-container {
+            margin-top: 40px;
+            font-size: 18px;
+        }
+
+        select {
+            font-size: 16px;
+            padding: 5px;
+            border-radius: 5px;
+            margin-left: 10px;
+        }
+
+        #answer {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
-    <h1>欢迎来到我的网页</h1>
+    <h1>谁是最牛逼的人？</h1>
 
     <div class="photo-container">
-        <img src="3.jpg" alt="我的照片" class="photo" id="myPhoto">
+        <img src="images/myphoto.jpg" alt="我的照片" class="photo" id="myPhoto">
     </div>
 
     <!-- Modal -->
@@ -75,12 +100,26 @@
         <img class="modal-content" id="modalImg">
     </div>
 
+    <div class="question-container">
+        <label for="person-select">请选择最牛逼的人</label>
+        <select id="person-select">
+            <option value="blueHair">蓝头发</option>
+            <option value="redSweater">红毛衣</option>
+            <option value="blackHoodie">黑卫衣</option>
+            <option value="man">男的</option>
+        </select>
+    </div>
+
+    <div id="answer"></div>
+
     <script>
         // 获取元素
         var modal = document.getElementById("myModal");
         var modalImg = document.getElementById("modalImg");
         var photo = document.getElementById("myPhoto");
         var closeModal = document.getElementById("closeModal");
+        var personSelect = document.getElementById("person-select");
+        var answerDiv = document.getElementById("answer");
 
         // 当点击图片时，显示大图
         photo.onclick = function() {
@@ -99,6 +138,18 @@
                 modal.style.display = "none";
             }
         }
+
+        // 选择最牛逼的人后显示结果
+        personSelect.addEventListener("change", function() {
+            var selectedOption = personSelect.value;
+            if (selectedOption === "redSweater") {
+                answerDiv.textContent = "仙品！！！";
+                answerDiv.style.color = "green";
+            } else {
+                answerDiv.textContent = "太厕了！！！";
+                answerDiv.style.color = "red";
+            }
+        });
     </script>
 </body>
 </html>

@@ -77,10 +77,10 @@
             image1.src = imageSrc;
             options1.style.display = "none";
 
-            // 显示新选项
+            // 创建并显示新选项
             var newOptionHTML = '';
             newOptions.forEach(function(option, index) {
-                newOptionHTML += `<button id="option${index + 2}">${option}</button>`;
+                newOptionHTML += `<button class="new-option" id="option${index + 2}">${option}</button>`;
             });
             options1.innerHTML = newOptionHTML;
 
@@ -92,16 +92,24 @@
                 image1.src = nextImage;
             }
 
-            // 重新给选项按钮绑定点击事件
-            document.querySelectorAll(".button-group button").forEach(function(button, index) {
+            // 重新给新选项按钮绑定点击事件
+            document.querySelectorAll(".new-option").forEach(function(button, index) {
                 button.onclick = function() {
                     if (index === 0) {
                         messageDiv.textContent = "你是对的";
-                        image1.src = "66.jpg";
+                        image1.src = "66.jpg"; // 如果选择了左边的选项
                     } else {
-                        showOptions("22.jpg", ["还是算了", "就要报这个！"], "33.jpg", "继续选择...");
+                        // 根据选择继续显示新图片和选项
+                        if (nextImage === "33.jpg") {
+                            showOptions("33.jpg", ["我听劝", "我坚持！"], "44.jpg", "继续选择...");
+                        } else if (nextImage === "44.jpg") {
+                            showOptions("44.jpg", ["立刻退学复读", "我就要毕业"], "55.jpg", "继续选择...");
+                        } else if (nextImage === "55.jpg") {
+                            messageDiv.textContent = "这辈子有了";
+                            image1.src = "55.jpg";
+                        }
                     }
-                }
+                };
             });
         }
 

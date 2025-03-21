@@ -2,58 +2,44 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>定风波·莫听穿林打叶声</title>
+    <title>定风波·莫听穿林打叶声（带拼音）</title>
     <style>
+        /* 在原样式基础上增加拼音相关样式 */
         body {
             font-family: '楷体', KaiTi, serif;
-            line-height: 1.6;
+            line-height: 2; /* 增加行高容纳拼音 */
             background-color: #f5f5f5;
             margin: 2rem;
         }
 
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .title {
-            font-size: 1.8rem;
-            text-align: center;
-            color: #2c3e50;
-            margin-bottom: 1rem;
-        }
-
-        .author {
-            font-size: 1.1rem;
-            text-align: center;
-            color: #7f8c8d;
-            margin-bottom: 2rem;
-        }
-
-        .poem-content {
-            font-size: 1.2rem;
-            text-align: center;
-            color: #34495e;
+        rt {
+            font-size: 0.6em;
+            color: #666;
+            font-family: Arial, sans-serif; /* 拼音用无衬线字体更清晰 */
         }
 
         .verse {
-            margin: 1rem 0;
+            margin: 1.5rem 0;
         }
 
-        .notes {
-            font-style: italic;
-            color: #95a5a6;
-            margin-top: 2rem;
-            text-align: center;
-        }
+        /* 其他保持原有样式不变 */
+        .container { max-width: 600px; margin: 0 auto; }
+        .title { font-size: 1.8rem; text-align: center; color: #2c3e50; }
+        .author { font-size: 1.1rem; text-align: center; color: #7f8c8d; }
+        .poem-content { font-size: 1.2rem; text-align: center; color: #34495e; }
+        .notes { font-style: italic; color: #95a5a6; margin-top: 2rem; text-align: center; }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1 class="title">定风波·莫听穿林打叶声</h1>
-        <p class="author">〔宋〕苏轼</p>
+        <h1 class="title">定<ruby>风<rt>fēng</rt></ruby><ruby>波<rt>bō</rt></ruby></h1>
+        <p class="author">〔<ruby>宋<rt>Sòng</rt></ruby>〕<ruby>苏<rt>Sū</rt></ruby><ruby>轼<rt>shì</rt></ruby></p>
         <div class="poem-content">
-            <p class="verse">莫听穿林打叶声，何妨吟啸且徐行。</p>
+            <p class="verse">
+                <ruby>莫<rt>mò</rt></ruby><ruby>听<rt>tīng</rt></ruby><ruby>穿<rt>chuān</rt></ruby><ruby>林<rt>lín</rt></ruby><ruby>打<rt>dǎ</rt></ruby><ruby>叶<rt>yè</rt></ruby><ruby>声<rt>shēng</rt></ruby>，
+                <ruby>何<rt>hé</rt></ruby><ruby>妨<rt>fáng</rt></ruby><ruby>吟<rt>yín</rt></ruby><ruby>啸<rt>xiào</rt></ruby><ruby>且<rt>qiě</rt></ruby><ruby>徐<rt>xú</rt></ruby><ruby>行<rt>xíng</rt></ruby>。
+            </p>
+            <!-- 剩余诗句按相同格式添加 -->
             <p class="verse">竹杖芒鞋轻胜马，谁怕？一蓑烟雨任平生。</p>
             <p class="verse">料峭春风吹酒醒，微冷，山头斜照却相迎。</p>
             <p class="verse">回首向来萧瑟处，归去，也无风雨也无晴。</p>

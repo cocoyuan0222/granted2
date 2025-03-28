@@ -16,9 +16,26 @@
             flex-direction: column; /* Stack the image and calculator vertically */
         }
 
+        .header {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            margin: 0;
+            color: #333;
+        }
+
         .image-container {
             text-align: center;
             margin-bottom: 20px;
+        }
+
+        .image-container img {
+            width: 100px;
+            height: 100px;
+            border-radius: 10px; /* Optional: gives rounded corners to the image */
         }
 
         .calculator {
@@ -98,15 +115,14 @@
         .button.zero {
             grid-column: span 2;
         }
-
-        /* Image styles */
-        .image-container img {
-            width: 200px;
-            height: 200px;
-        }
     </style>
 </head>
 <body>
+    <!-- Header with text above the image -->
+    <div class="header">
+        <h1>我的计算器</h1>
+    </div>
+
     <!-- Image container for hollowknight.png -->
     <div class="image-container">
         <img src="hollowknight.png" alt="Hollow Knight">

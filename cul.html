@@ -18,6 +18,26 @@
             width: 320px;
             background: white;
             padding: 20px;
+            border-radius: 10px;<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网页计算器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+        .calculator {
+            width: 320px;
+            background: white;
+            padding: 20px;
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             text-align: center;
@@ -57,6 +77,7 @@
             color: white;
             grid-row: span 2;
             grid-column: 4;
+            height: 130px;
         }
         .buttons button.clear {
             background: red;
@@ -86,9 +107,9 @@
             <button onclick="appendToDisplay('1')">1</button>
             <button onclick="appendToDisplay('2')">2</button>
             <button onclick="appendToDisplay('3')">3</button>
-            <button onclick="calculateResult()" class="equals">=</button>
-            <button onclick="appendToDisplay('0')" class="zero">0</button>
             <button onclick="appendToDisplay('.')">.</button>
+            <button onclick="appendToDisplay('0')" class="zero">0</button>
+            <button onclick="calculateResult()" class="equals">=</button>
         </div>
     </div>
     <script>

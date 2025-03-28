@@ -16,16 +16,16 @@
         }
 
         .calculator {
+            width: 320px;
+            padding: 20px;
             background-color: white;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            width: 260px;
         }
 
         .display {
             width: 100%;
-            height: 50px;
+            height: 60px;
             font-size: 2rem;
             text-align: right;
             background-color: #e6e6e6;
@@ -33,17 +33,18 @@
             border-radius: 5px;
             padding: 10px;
             margin-bottom: 20px;
+            box-sizing: border-box;
         }
 
         .button-row {
-            display: flex;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 10px;
         }
 
         .button {
-            width: 60px;
             height: 60px;
-            margin: 5px;
             font-size: 1.5rem;
             background-color: #f1f1f1;
             border: none;
@@ -72,6 +73,7 @@
         .button.equals {
             background-color: #4caf50;
             color: white;
+            grid-column: span 2;
         }
 
         .button.equals:hover {
@@ -141,4 +143,3 @@
     </script>
 </body>
 </html>
-
